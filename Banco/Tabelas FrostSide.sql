@@ -43,10 +43,12 @@ CREATE TABLE sensor (
 
 CREATE TABLE caminhao (
   idcaminhao INT PRIMARY KEY auto_increment,
-  fkSensorr INT,
-    FOREIGN KEY (fkSensorr)
+  fkSensor INT,
+    FOREIGN KEY (fkSensor)
     REFERENCES sensor (idSensor));
-  
+
+
+-- ver depois
 CREATE TABLE armazenamento (
   fkSensor INT PRIMARY KEY auto_increment,
   idArmazenamento INT,
