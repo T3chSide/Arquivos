@@ -15,8 +15,6 @@ CREATE TABLE endereco (
   
   DESC endereco;
   
-  
-  
   CREATE TABLE empresa (
   idEmpresa INT PRIMARY KEY auto_increment,
   razaoSocial VARCHAR(45),
