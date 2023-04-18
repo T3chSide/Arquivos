@@ -9,7 +9,13 @@ CREATE TABLE endereco (
   logradouro VARCHAR(45),
   numero VARCHAR(45),
   complemento VARCHAR(45),
-  cep CHAR(9));
+  cep CHAR(9)
+  
+  );
+  
+  DESC endereco;
+  
+  
   
   CREATE TABLE empresa (
   idEmpresa INT PRIMARY KEY auto_increment,
@@ -18,6 +24,8 @@ CREATE TABLE endereco (
   fkEndereco INT,
     FOREIGN KEY (fkEndereco)
     REFERENCES endereco (idEndereco));
+    
+    DESC empresa;
     
     CREATE TABLE usuario (
   idUsuário INT PRIMARY KEY auto_increment,
@@ -28,10 +36,14 @@ CREATE TABLE endereco (
   fkEmpresa INT,
     FOREIGN KEY (fkEmpresa)
     REFERENCES empresa (idEmpresa));
+    
+    DESC usuario;
   
 CREATE TABLE sensor (
   idSensor INT PRIMARY KEY auto_increment,
   tipo VARCHAR(45));
+  
+  DESC sensor;
   
   CREATE TABLE registro (
   idRegistro INT PRIMARY KEY auto_increment,
@@ -41,23 +53,30 @@ CREATE TABLE sensor (
     FOREIGN KEY (fkSensor)
     REFERENCES sensor (idSensor));
 
+DESC registro;
+
 CREATE TABLE caminhao (
   idcaminhao INT PRIMARY KEY auto_increment,
   fkSensor INT,
     FOREIGN KEY (fkSensor)
     REFERENCES sensor (idSensor));
+    -- dados do caminhao?
+
+DESC caminhao;
 
 
--- ver depois
+
 CREATE TABLE armazenamento (
-  fkSensor INT PRIMARY KEY auto_increment,
-  idArmazenamento INT,
+  idArmazenamento INT PRIMARY KEY auto_increment,
+  fkSensor INT,
   fkEndereco INT,
     FOREIGN KEY (fkSensor)
     REFERENCES sensor (idSensor),
     FOREIGN KEY (fkEndereco)
     REFERENCES endereco (idEndereco));
-
+    
+DESC armazenamento;
+    
 CREATE TABLE lote (
   idLote INT PRIMARY KEY auto_increment,
   fkCaminhao INT,
@@ -68,3 +87,5 @@ CREATE TABLE lote (
     REFERENCES caminhao (idcaminhao),
     FOREIGN KEY (fkArmazenamento)
     REFERENCES armazenamento (idArmazenamento));
+    
+DESC lote;
