@@ -68,20 +68,22 @@ SELECT * FROM registroSensor;
  tipoContainer VARCHAR (40),
  constraint chkTipoContainer CHECK (tipoContainer in('caminhao','armazenamento')),
  identificacao VARCHAR (60),
+ fkEndereco INT,
+ foreign key (fkEndereco) references endereco(idEndereco),
 fkEmpresa INT,
 foreign key (fkEmpresa) references empresa(idEmpresa),
 fkSensor INT,
 foreign key (fkSensor) references sensor(idSensor)
  )auto_increment=100;
 
+
 INSERT INTO container VALUES 
-(NULL,'caminhao','AFD4-984',1001,'1'),
-(NULL,'armazenamento',NULL,1001,'2'),
-(NULL,'caminhao','VNJ0-376',1000,'3'),
-(NULL,'armazenamento',NULL,1000,'4');
+(NULL,'caminhao','AFD4-984',NULL,1001,'1'),
+(NULL,'armazenamento',NULL,'1',1001,'2'),
+(NULL,'caminhao','VNJ0-376',null,1000,'3'),
+(NULL,'armazenamento',NULL,'2',1000,'4');
 
 SELECT * FROM container;
-
 
 
 -- Tabela endereço
@@ -91,15 +93,13 @@ rua VARCHAR(45),
 numero VARCHAR(20),
 bairro VARCHAR(45),
 cep CHAR(9),
-cidade VARCHAR(45),
-fkContainer INT,
-foreign key (fkContainer) references container(idContainer)
+cidade VARCHAR(45)
 );
-
 INSERT INTO endereco VALUES 
-(NULL, 'R. Ferraz de Vasconcelosl','80 ','Nossa Sra. do Ó','02760-060','São Paulo',103),
-(NULL, ' Rua Oscar de Moura Lacerda','231',' Imirim ',' 02541-070','São Paulo',101);
+(NULL, 'R. Ferraz de Vasconcelosl','80','Nossa Sra. do Ó','02760-060','São Paulo'),
+(NULL, ' Rua Oscar de Moura Lacerda','231',' Imirim ','02541-070','São Paulo');
 SELECT * FROM endereco;
+
 
 -- Tabela Lote
 CREATE TABLE lote(
