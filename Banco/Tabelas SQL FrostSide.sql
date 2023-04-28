@@ -49,42 +49,18 @@ SELECT * FROM sensor;
 -- Tabela RegistroSensor
 CREATE TABLE registroSensor(
 idRegistro INT PRIMARY KEY auto_increment,
-temperatura INT,
+temperatura FLOAT,
 dtHora  DATETIME default current_timestamp,
 fkSensor INT,
 foreign key (fkSensor) references sensor(idSensor)
 );
 
 INSERT INTO registroSensor (temperatura,fkSensor) VALUES 
-(3 , 1),
+(3.5 , 1),
 (4, 2),
 (5 , 3),
 (null , 4);
 SELECT * FROM registroSensor;
-
- -- Tabela Container
- CREATE TABLE container (
- idContainer INT PRIMARY KEY auto_increment,
- tipoContainer VARCHAR (40),
- constraint chkTipoContainer CHECK (tipoContainer in('caminhao','armazenamento')),
- identificacao VARCHAR (60),
- fkEndereco INT,
- foreign key (fkEndereco) references endereco(idEndereco),
-fkEmpresa INT,
-foreign key (fkEmpresa) references empresa(idEmpresa),
-fkSensor INT,
-foreign key (fkSensor) references sensor(idSensor)
- )auto_increment=100;
-
-
-INSERT INTO container VALUES 
-(NULL,'caminhao','AFD4-984',NULL,1001,'1'),
-(NULL,'armazenamento',NULL,'1',1001,'2'),
-(NULL,'caminhao','VNJ0-376',null,1000,'3'),
-(NULL,'armazenamento',NULL,'2',1000,'4');
-
-SELECT * FROM container;
-
 
 -- Tabela endereço
 CREATE TABLE endereco (
@@ -97,9 +73,34 @@ cidade VARCHAR(45)
 );
 INSERT INTO endereco VALUES 
 (NULL, 'R. Ferraz de Vasconcelosl','80','Nossa Sra. do Ó','02760-060','São Paulo'),
-(NULL, ' Rua Oscar de Moura Lacerda','231',' Imirim ','02541-070','São Paulo');
+(NULL, ' Rua Oscar de Moura Lacerda','231',' Imirim ','02541-070','São Paulo'),
+(NULL, ' Rua Leopoldo Miguez',' 327',' Cambuci','01518-020','São Paulo'),
+(NULL, '  Av. Menotti Laudisio','100 ',' Pirituba','02945-000','São Paulo');
 SELECT * FROM endereco;
 
+
+
+ -- Tabela Container
+ CREATE TABLE container (
+ idContainer INT PRIMARY KEY auto_increment,
+ tipoContainer VARCHAR (40),
+ constraint chkTipoContainer CHECK (tipoContainer in('caminhao','armazenamento')),
+ fkEndereco INT,
+ foreign key (fkEndereco) references endereco(idEndereco),
+fkEmpresa INT,
+foreign key (fkEmpresa) references empresa(idEmpresa),
+fkSensor INT,
+foreign key (fkSensor) references sensor(idSensor)
+ )auto_increment=100;
+
+
+INSERT INTO container VALUES 
+(NULL,'caminhao',3,1001,'1'),
+(NULL,'armazenamento','1',1001,'2'),
+(NULL,'caminhao',4,1000,'3'),
+(NULL,'armazenamento','2',1000,'4');
+
+SELECT * FROM container;
 
 -- Tabela Lote
 CREATE TABLE lote(
